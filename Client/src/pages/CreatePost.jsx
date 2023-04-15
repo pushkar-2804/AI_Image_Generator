@@ -4,6 +4,7 @@ import FormField from "../components/FormField";
 import Loader from "../components/Loader";
 import { getRandomPrompt } from "../utils";
 import preview from "../assets/preview.png";
+import axios from "axios";
 
 const CreatePost = () => {
   const navigate = useNavigate();
@@ -17,8 +18,41 @@ const CreatePost = () => {
   const [generatingImg, setGeneratingImg] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const generateImage = () => {};
-  const handleSubmit = () => {};
+  const generateImage = () => {
+    if (form.prompt) {
+      setGeneratingImg(true);
+      const tempPrompt = { prompt: form.prompt };
+      axios
+        .post("http://localhost:8080/api/v1/dalle/", tempPrompt)
+        .then((e) => {
+          // console.log(e);
+          setForm({ ...form, photo: `data:image/jpeg;base64,${e.data.photo}` });
+          setGeneratingImg(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setGeneratingImg(false);
+        });
+    } else alert("Please enter a prompt");
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (form.prompt && form.photo) {
+      setLoading(true);
+
+      axios
+        .post("http://localhost:8080/api/v1/post/", form)
+        .then(() => {
+          navigate("/");
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+        });
+    } else alert("Please enter a prompt and Generate an image");
+  };
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
