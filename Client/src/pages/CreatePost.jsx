@@ -23,7 +23,10 @@ const CreatePost = () => {
       setGeneratingImg(true);
       const tempPrompt = { prompt: form.prompt };
       axios
-        .post(`${process.env.REACT_APP_URL}/api/v1/dalle/`, tempPrompt)
+        .post(
+          `https://ai-image-generator-jrxx.onrender.com/api/v1/dalle/`,
+          tempPrompt
+        )
         .then((e) => {
           // console.log(e.data.photo);
           setForm({ ...form, photo: `data:image/jpeg;base64,${e.data.photo}` });
@@ -44,7 +47,7 @@ const CreatePost = () => {
 
       console.log(form);
       axios
-        .post(`${process.env.REACT_APP_URL}/api/v1/post/`, form)
+        .post(`https://ai-image-generator-jrxx.onrender.com/api/v1/post/`, form)
         .then(() => {
           navigate("/");
           setLoading(false);
