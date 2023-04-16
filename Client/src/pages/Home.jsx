@@ -49,6 +49,8 @@ const Home = () => {
     );
   };
 
+  // return
+
   return (
     <section className="max-w-7xl mx-auto">
       <div>
