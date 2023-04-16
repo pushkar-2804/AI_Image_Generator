@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormField from "../components/FormField";
 import Loader from "../components/Loader";
+import axios from "axios";
+import Card from "../components/Card";
 
 const RenderCards = ({ data, title }) => {
   if (data?.length > 0)
@@ -14,6 +16,18 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [allPosts, setAllPosts] = useState(null);
   const [searchText, setSearchText] = useState("");
+
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get("http://localhost:8080/api/v1/post/")
+      .then((e) => {
+        setAllPosts(e.data.data.reverse());
+        // console.log(e.data.data);
+      })
+      .catch((err) => console.log(err));
+    setLoading(false);
+  }, []);
 
   return (
     <section className="max-w-7x1 mx-auto">
@@ -46,7 +60,7 @@ const Home = () => {
               {searchText ? (
                 <RenderCards data={[]} title="No search results found" />
               ) : (
-                <RenderCards data={[]} title="No post found" />
+                <RenderCards data={allPosts} title="No post found" />
               )}
             </div>
           </>

@@ -25,7 +25,7 @@ const CreatePost = () => {
       axios
         .post("http://localhost:8080/api/v1/dalle/", tempPrompt)
         .then((e) => {
-          // console.log(e);
+          // console.log(e.data.photo);
           setForm({ ...form, photo: `data:image/jpeg;base64,${e.data.photo}` });
           setGeneratingImg(false);
         })
@@ -35,12 +35,14 @@ const CreatePost = () => {
         });
     } else alert("Please enter a prompt");
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (form.prompt && form.photo) {
       setLoading(true);
 
+      console.log(form);
       axios
         .post("http://localhost:8080/api/v1/post/", form)
         .then(() => {
