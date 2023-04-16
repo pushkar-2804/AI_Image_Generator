@@ -5,7 +5,7 @@ const FormField = ({
   type,
   name,
   value,
-  placeHolder,
+  placeholder,
   handleChange,
   isSurpriseMe,
   handleSurpriseMe,
@@ -34,7 +34,7 @@ const FormField = ({
         id={name}
         name={name}
         value={value}
-        placeholder={placeHolder}
+        placeholder={placeholder}
         onChange={handleChange}
         required
         className="bg-grey-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#4649ff] focus:border-[#4649ff] outline-none block w-full p-3"
