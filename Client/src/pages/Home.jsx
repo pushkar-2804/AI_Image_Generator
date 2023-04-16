@@ -22,7 +22,7 @@ const Home = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:8080/api/v1/post/")
+      .get(`${process.env.REACT_APP_URL}/api/v1/post/`)
       .then((e) => {
         setAllPosts(e.data.data.reverse());
         // console.log(e.data.data);

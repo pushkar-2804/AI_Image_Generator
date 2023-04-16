@@ -23,7 +23,7 @@ const CreatePost = () => {
       setGeneratingImg(true);
       const tempPrompt = { prompt: form.prompt };
       axios
-        .post("http://localhost:8080/api/v1/dalle/", tempPrompt)
+        .post(`${process.env.REACT_APP_URL}/api/v1/dalle/`, tempPrompt)
         .then((e) => {
           // console.log(e.data.photo);
           setForm({ ...form, photo: `data:image/jpeg;base64,${e.data.photo}` });
@@ -44,7 +44,7 @@ const CreatePost = () => {
 
       console.log(form);
       axios
-        .post("http://localhost:8080/api/v1/post/", form)
+        .post(`${process.env.REACT_APP_URL}/api/v1/post/`, form)
         .then(() => {
           navigate("/");
           setLoading(false);
