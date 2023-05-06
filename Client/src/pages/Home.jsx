@@ -22,7 +22,7 @@ const Home = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`aiimagegenerator-production-4fdf.up.railway.app/api/v1/post/`)
+      .get(`https://ai-image-generator-jrxx.onrender.com/api/v1/post/`)
       .then((e) => {
         setAllPosts(e.data.data.reverse());
         // console.log(e.data.data);
