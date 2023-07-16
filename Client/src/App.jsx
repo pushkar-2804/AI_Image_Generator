@@ -31,6 +31,16 @@ const App = () => {
         console.error(error);
       });
   };
+  const handleSignOut = () => {
+    // Sign out the current user
+    firebase
+      .auth()
+      .signOut()
+      .catch((error) => {
+        // Handle sign-out errors if needed
+        console.error(error);
+      });
+  };
 
   return (
     <div>
@@ -39,12 +49,20 @@ const App = () => {
           <img src={logo} alt="logo" className="w-28 object-contain" />
         </Link>
         {user ? (
-          <Link
-            to="/create-post"
-            className="font-inter font-medium bg-[#6469ff] text-white px-4 py-2 rounded-md"
-          >
-            Create
-          </Link>
+          <div>
+            <Link
+              to="/create-post"
+              className="font-inter font-medium bg-[#6469ff] text-white px-4 py-2 rounded-md"
+            >
+              Create
+            </Link>
+            <button
+              onClick={handleSignOut}
+              className="font-inter font-medium bg-red-500 text-white px-4 py-2 ml-4 rounded-md"
+            >
+              Logout
+            </button>
+          </div>
         ) : (
           <button
             onClick={handleSignInWithGoogle}
