@@ -24,7 +24,7 @@ const CreatePost = () => {
       const tempPrompt = { prompt: form.prompt };
       axios
         .post(
-          `https://aiimagegenerator-production-4fdf.up.railway.app/api/v1/dalle/`,
+          `https://ai-image-generator-jrxx.onrender.com/api/v1/dalle/`,
           tempPrompt
         )
         .then((e) => {
@@ -47,10 +47,7 @@ const CreatePost = () => {
 
       console.log(form);
       axios
-        .post(
-          `https://aiimagegenerator-production-4fdf.up.railway.app/api/v1/post/`,
-          form
-        )
+        .post(`https://ai-image-generator-jrxx.onrender.com/api/v1/post/`, form)
         .then(() => {
           navigate("/");
           setLoading(false);
